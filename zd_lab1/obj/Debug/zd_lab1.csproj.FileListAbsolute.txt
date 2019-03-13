@@ -1,0 +1,11 @@
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\bin\Debug\zd_lab1.exe.config
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\bin\Debug\zd_lab1.exe
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\bin\Debug\zd_lab1.pdb
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\obj\Debug\zd_lab1.csprojAssemblyReference.cache
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\obj\Debug\zd_lab1.AboutForm.resources
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\obj\Debug\zd_lab1.Properties.Resources.resources
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\obj\Debug\zd_lab1.csproj.GenerateResource.cache
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\obj\Debug\zd_lab1.csproj.CoreCompileInputs.cache
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\obj\Debug\zd_lab1.exe
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\obj\Debug\zd_lab1.pdb
+C:\Users\usr0\Documents\mpei\zd_lab1\zd_lab1\obj\Debug\zd_lab1.MainForm.resources
