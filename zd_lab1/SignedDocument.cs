@@ -19,6 +19,7 @@ namespace zd_lab1
             edsBlob = new byte[] { };
             text = "";
         }
+
         public SignedDocument(string fileName)
         {
             SignedDocument signedDocument;
@@ -71,6 +72,5 @@ namespace zd_lab1
                 binaryWriter.Write(Encoding.Unicode.GetBytes(text));
             }
         }
-
     }
 }
