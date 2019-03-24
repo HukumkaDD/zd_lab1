@@ -53,7 +53,7 @@ namespace zd_lab1
                 return;
             }
 
-            if (!CryptEngine.CheckEDS(signedDocument.edsBlob, Encoding.Default.GetBytes(signedDocument.text), HashAlg.sha512, CryptAlg.rsa, publicKey.blob))
+            if (!CryptEngine.CheckEDS(signedDocument.edsBlob, Encoding.Default.GetBytes(signedDocument.text), HashAlg.sha1, CryptAlg.rsa, publicKey.blob))
             {
                 MessageBox.Show(this, "Электронная подпись документа не подтверждена.");
                 return;
@@ -72,7 +72,7 @@ namespace zd_lab1
             SignedDocument signedDocument = new SignedDocument();
             signedDocument.text = tbEditDocument.Text;
             signedDocument.userName = tbUserName.Text;
-            signedDocument.edsBlob = CryptEngine.GetEds(Encoding.Default.GetBytes(signedDocument.text), HashAlg.sha512, CryptAlg.rsa);
+            signedDocument.edsBlob = CryptEngine.GetEds(Encoding.Default.GetBytes(signedDocument.text), HashAlg.sha1, CryptAlg.rsa);
             signedDocument.SaveToFile(saveFileDialog.FileName);
 
             this.Text = "Подписано - " + signedDocument.userName;

@@ -23,7 +23,7 @@ namespace zd_lab1
     {
         private static CspParameters cspParameters;
         private static RSACryptoServiceProvider rsaCsp;
-        private static DSACryptoServiceProvider dsaCsp;
+        private static RSACryptoServiceProvider dsaCsp;
 
         public static byte[] GetHash(byte[] data, HashAlg alg)
         {
@@ -70,8 +70,8 @@ namespace zd_lab1
                 return localRsaCsp.VerifyHash(hash, "SHA1", eds);
             }
             {
-                localCspParameters.ProviderType = 13;
-                DSACryptoServiceProvider localDsaCsp = new DSACryptoServiceProvider(localCspParameters);
+                localCspParameters.ProviderType = 1;
+                RSACryptoServiceProvider localDsaCsp = new RSACryptoServiceProvider(localCspParameters);
                 localDsaCsp.ImportCspBlob(pubKey);
                 return localDsaCsp.VerifyHash(hash, "SHA1", eds);
             }
@@ -107,8 +107,8 @@ namespace zd_lab1
             };
             cspParameters.ProviderType = 1;
             rsaCsp = new RSACryptoServiceProvider(cspParameters);
-            cspParameters.ProviderType = 13;
-            dsaCsp = new DSACryptoServiceProvider(cspParameters);
+            cspParameters.ProviderType = 1;
+            dsaCsp = new RSACryptoServiceProvider(cspParameters);
         }
 
         public static void CreateCspContainerByName(string name)
