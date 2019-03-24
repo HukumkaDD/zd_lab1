@@ -14,10 +14,12 @@ namespace zd_lab1
 
     public partial class MainForm : Form
     {
+        #region
         private const string rsa = "RSA";
         private const string dsa = "DSA";
         private const string sha1 = "SHA1";
         private const string sha512 = "SHA512";
+        #endregion
 
         public MainForm()
         {
@@ -53,13 +55,13 @@ namespace zd_lab1
                 return;
             }
 
-            if (!CryptEngine.CheckEds(publicKey.eds, publicKey.blob, sha512, rsa))
+            if (!CryptEngine.CheckEds(publicKey.eds, publicKey.blob, sha1, dsa))
             {
                 MessageBox.Show(this, "Электронная подпись открытого ключа автора документа не подтверждена.");
                 return;
             }
 
-            if (!CryptEngine.CheckEds(signedDocument.edsBlob, Encoding.Default.GetBytes(signedDocument.text), sha1, dsa, publicKey.blob))
+            if (!CryptEngine.CheckEds(signedDocument.edsBlob, Encoding.Default.GetBytes(signedDocument.text), sha1, rsa, publicKey.blob))
             {
                 MessageBox.Show(this, "Электронная подпись документа не подтверждена.");
                 return;
@@ -78,7 +80,7 @@ namespace zd_lab1
             SignedDocument signedDocument = new SignedDocument();
             signedDocument.text = tbEditDocument.Text;
             signedDocument.userName = tbUserName.Text;
-            signedDocument.edsBlob = CryptEngine.GetEds(Encoding.Default.GetBytes(signedDocument.text), sha1, dsa);
+            signedDocument.edsBlob = CryptEngine.GetEds(Encoding.Default.GetBytes(signedDocument.text), sha1, rsa);
             signedDocument.SaveToFile(saveFileDialog.FileName);
 
             this.Text = "Подписано - " + signedDocument.userName;
@@ -104,7 +106,7 @@ namespace zd_lab1
                 return;
 
             PublicKey publicKey = new PublicKey(openFileDialog.FileName);
-            publicKey.eds = CryptEngine.GetEds(publicKey.blob, sha512, rsa);   
+            publicKey.eds = CryptEngine.GetEds(publicKey.blob, sha1, dsa);   
             publicKey.Save(Application.StartupPath + "\\PK\\" + publicKey.ownerUserName + ".pk"); 
         }
 
@@ -119,6 +121,7 @@ namespace zd_lab1
         {
             tbUserName.Enabled = true;
             tbUserName.Text = "";
+            tbEditDocument.Text = "";
             tbUserName.Focus();
         }
 
