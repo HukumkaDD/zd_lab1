@@ -74,6 +74,8 @@ namespace zd_lab1
         private void tsmiSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Подписанный документ|*.sd";
+
             if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
@@ -89,6 +91,8 @@ namespace zd_lab1
         private void tsmiExportPubKey_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Открытый ключ|*.pk";
+
             if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 return;
 
