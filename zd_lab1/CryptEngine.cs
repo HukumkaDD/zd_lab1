@@ -63,21 +63,24 @@ namespace zd_lab1
         {
             HashAlgorithm hashAlgorithm = GetHashAlgoritm(hashAlg);
             CspParameters localCspParameters = new CspParameters();
+            bool check;
 
             if (cryptAlg == dsa)
             {
                localCspParameters.ProviderType = 13;
                DSACryptoServiceProvider localDsaCsp = new DSACryptoServiceProvider(localCspParameters);
                localDsaCsp.ImportCspBlob(pubKey);
-               return localDsaCsp.VerifyData(data, eds);
+               check = localDsaCsp.VerifyData(data, eds);
             }
             else
             {
                 localCspParameters.ProviderType = 1;
                 RSACryptoServiceProvider localDsaCsp = new RSACryptoServiceProvider(localCspParameters);
                 localDsaCsp.ImportCspBlob(pubKey);
-                return localDsaCsp.VerifyData(data, hashAlgorithm, eds);
+                check = localDsaCsp.VerifyData(data, hashAlgorithm, eds);
             }
+
+            return check;
         }
 
         public static bool CspContainerExists(string containerName) {
@@ -89,7 +92,8 @@ namespace zd_lab1
 
             try
             {
-                var localDsaCsp = new RSACryptoServiceProvider(localCspParameters);
+                var localRsaCsp = new RSACryptoServiceProvider(localCspParameters);
+                //var locaDsaCsp = new DSACryptoServiceProvider(localCspParameters);
             }
             catch (Exception e)
             {
@@ -124,11 +128,20 @@ namespace zd_lab1
             };
             localCspParametrs.ProviderType = 1;
             var q = new RSACryptoServiceProvider(localCspParametrs);
+            localCspParametrs.ProviderType = 13;
+            var k = new DSACryptoServiceProvider(localCspParametrs);
         }
 
-        public static byte[] GetCurrentPublicKey()
+        public static byte[] GetCurrentPublicKey(string cryptAlg)
         {
-            return rsaCsp.ExportCspBlob(false);
+            byte[] keyBlob;
+
+            if (cryptAlg == dsa)
+                keyBlob = dsaCsp.ExportCspBlob(false);
+            else
+                keyBlob = rsaCsp.ExportCspBlob(false);
+
+            return keyBlob;
         }
 
         public static void RemoveKeysByName(string cName)
@@ -140,8 +153,11 @@ namespace zd_lab1
                 Flags = CspProviderFlags.UseExistingKey,
             };
             var q = new RSACryptoServiceProvider(localCspParametrs);
-            q.PersistKeyInCsp=false;
+            var k  = new RSACryptoServiceProvider(localCspParametrs);
+            q.PersistKeyInCsp = false;
             q.Clear();
+            k.PersistKeyInCsp = false;
+            k.Clear();
         }
     }
 }
